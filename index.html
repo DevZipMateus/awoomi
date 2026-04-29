@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awoomi</title>
+  <meta name="description" content="Awoomi — Arte afro-religiosa artesanal. Esculturas de Orixás, paramentos, ferramentas e penca de balangandã. É decoração, é proteção, é AwÔ Omi.">
+  <meta property="og:title" content="Awoomi">
+  <meta property="og:description" content="Arte afro-religiosa artesanal. Esculturas de Orixás, paramentos, ferramentas e penca de balangandã. É decoração, é proteção, é AwÔ Omi.">
+  <meta property="og:image" content="Captura_de_tela_de_2026-04-29_09-01-12-removebg-preview.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <link rel="icon" type="image/png" href="Captura_de_tela_de_2026-04-29_09-01-12-removebg-preview.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --azul: #3B88C3;
+      --petroleo: #1A3D5C;
+      --petroleo-escuro: #0F2438;
+      --tiffany: #6ECFCF;
+      --tiffany-claro: #A8E6E6;
+      --branco: #FFFFFF;
+      --azul-claro: #EBF6FD;
+      --azul-medio: #B8D9F0;
+      --ouro: #C9A050;
+      --cinza: #334E68;
+      --shadow: 0 4px 24px rgba(26,61,92,0.13);
+      --shadow-lg: 0 10px 44px rgba(26,61,92,0.22);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--petroleo);
+      background: var(--branco);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+
+    header.scrolled {
+      background: var(--petroleo-escuro);
+      padding: 0.7rem 2.5rem;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .logo-header {
+      height: 46px;
+      transition: height 0.4s;
+    }
+
+    header.scrolled .logo-header { height: 36px; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--tiffany);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    nav a:hover { color: var(--tiffany); }
+    nav a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: var(--tiffany) !important;
+      color: var(--petroleo-escuro) !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 700 !important;
+      transition: background 0.3s, transform 0.2s !important;
+    }
+
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--ouro) !important; color: var(--petroleo-escuro) !important; transform: translateY(-1px); }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--petroleo-escuro);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      color: white;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover { color: var(--tiffany); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--petroleo-escuro) 0%, var(--petroleo) 55%, #1e5580 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 2rem 5rem;
+    }
+
+    .drops-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .drop {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(110,207,207,0.07);
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0%   { transform: translateY(110vh) scale(0.3); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-15vh) scale(1); opacity: 0; }
+    }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .hero-logo-img {
+      width: min(360px, 75vw);
+      margin-bottom: 1.75rem;
+      filter: drop-shadow(0 0 50px rgba(110,207,207,0.55));
+      animation: fade-down 0.9s ease both;
+    }
+
+    @keyframes fade-down {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+      animation: fade-up 0.9s ease 0.2s both;
+    }
+
+    .orn-line {
+      width: 56px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--tiffany));
+    }
+
+    .orn-line.r { background: linear-gradient(to left, transparent, var(--tiffany)); }
+    .orn-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--tiffany); }
+
+    h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      color: var(--branco);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 0 60px rgba(110,207,207,0.25);
+      animation: fade-up 0.9s ease 0.25s both;
+    }
+
+    .hero-sub {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.75rem, 2vw, 0.95rem);
+      color: var(--tiffany);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fade-up 0.9s ease 0.35s both;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto 2.75rem;
+      animation: fade-up 0.9s ease 0.45s both;
+    }
+
+    .hero-tagline strong { color: var(--tiffany); font-style: normal; }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fade-up 0.9s ease 0.55s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--tiffany);
+      color: var(--petroleo-escuro);
+      padding: 0.875rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(110,207,207,0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--ouro);
+      box-shadow: 0 6px 28px rgba(201,160,80,0.45);
+      transform: translateY(-2px);
+      color: var(--petroleo-escuro);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 0.875rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: all 0.3s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: var(--tiffany);
+      color: var(--tiffany);
+      transform: translateY(-2px);
+    }
+
+    /* wave bottom */
+    .hero-wave {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .wave-svg-1 { animation: wave-slide 9s linear infinite; }
+    .wave-svg-2 { animation: wave-slide 13s linear infinite reverse; opacity: 0.55; }
+
+    @keyframes wave-slide {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS BASE ── */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .sec-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .sec-label {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--tiffany);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      color: var(--petroleo);
+      line-height: 1.25;
+      margin-bottom: 0.9rem;
+    }
+
+    .sec-desc {
+      max-width: 580px;
+      margin: 0 auto;
+      color: var(--cinza);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    /* ── SOBRE ── */
+    #sobre {
+      padding: 7rem 0;
+      background: var(--branco);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .sobre-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .sobre-shape {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--azul-claro), rgba(110,207,207,0.12));
+      border-radius: 62% 38% 54% 46% / 48% 62% 38% 52%;
+    }
+
+    .sobre-logo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 340px;
+      filter: drop-shadow(0 8px 28px rgba(59,136,195,0.25));
+    }
+
+    .sobre-badge {
+      position: absolute;
+      bottom: 10px; right: 0;
+      background: var(--petroleo);
+      color: white;
+      padding: 0.8rem 1.25rem;
+      border-radius: 14px;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+    }
+
+    .sobre-badge strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--tiffany);
+      letter-spacing: 0;
+      margin-bottom: 0.15rem;
+    }
+
+    .sobre-text h2 { margin-bottom: 1.25rem; }
+
+    .sobre-text p {
+      color: var(--cinza);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .valores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .valor {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.9rem 1rem;
+      background: var(--azul-claro);
+      border-radius: 12px;
+      border-left: 3px solid var(--tiffany);
+    }
+
+    .valor-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--azul), var(--petroleo));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .valor-icon svg { width: 18px; height: 18px; stroke: white; fill: none; }
+
+    .valor h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--petroleo);
+      margin-bottom: 0.2rem;
+    }
+
+    .valor p {
+      font-size: 0.82rem;
+      color: var(--cinza);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── WAVE DIVIDER ── */
+    .divider-wave { overflow: hidden; line-height: 0; display: block; }
+
+    /* ── MERCADO ── */
+    #mercado {
+      padding: 5.5rem 0;
+      background: linear-gradient(140deg, var(--petroleo) 0%, var(--petroleo-escuro) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mercado-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(110,207,207,0.12) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+
+    #mercado .sec-label { color: var(--ouro); }
+    #mercado h2 { color: white; }
+    #mercado .sec-desc { color: rgba(255,255,255,0.65); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2.25rem 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 18px;
+      border: 1px solid rgba(110,207,207,0.18);
+      transition: all 0.35s;
+    }
+
+    .stat-card:hover {
+      background: rgba(110,207,207,0.1);
+      transform: translateY(-5px);
+      border-color: rgba(110,207,207,0.4);
+    }
+
+    .stat-icon {
+      width: 64px; height: 64px;
+      margin: 0 auto 1.25rem;
+      background: rgba(110,207,207,0.15);
+      border: 1.5px solid rgba(110,207,207,0.35);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-icon svg { width: 30px; height: 30px; stroke: var(--tiffany); fill: none; }
+
+    .stat-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tiffany);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      color: rgba(255,255,255,0.68);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    /* ── PRODUTOS ── */
+    #produtos {
+      padding: 7rem 0;
+      background: var(--azul-claro);
+    }
+
+    .produtos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .prod-card {
+      background: var(--branco);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .prod-visual {
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prod-card:nth-child(1) .prod-visual { background: linear-gradient(135deg, #1A3D5C, #2E6DA4); }
+    .prod-card:nth-child(2) .prod-visual { background: linear-gradient(135deg, #0F2438, #1a4a6a); }
+    .prod-card:nth-child(3) .prod-visual { background: linear-gradient(135deg, #1e5a7a, #2980b9); }
+    .prod-card:nth-child(4) .prod-visual { background: linear-gradient(135deg, #143658, #1a6d8a); }
+
+    .prod-visual svg { width: 110px; height: 110px; }
+
+    .prod-body { padding: 1.75rem; }
+
+    .prod-tag {
+      display: inline-block;
+      background: var(--azul-claro);
+      color: var(--azul);
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+    }
+
+    .prod-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--petroleo);
+      margin-bottom: 0.5rem;
+    }
+
+    .prod-card p {
+      color: var(--cinza);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+
+    .prod-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--azul-claro);
+    }
+
+    .prod-link {
+      color: var(--azul);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+
+    .prod-link:hover { color: var(--tiffany); }
+
+    /* ── CONTATO ── */
+    #contato {
+      padding: 7rem 0;
+      background: var(--branco);
+    }
+
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contato-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.75rem;
+    }
+
+    .c-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--azul), var(--petroleo));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .c-icon svg { width: 19px; height: 19px; }
+
+    .c-text h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tiffany);
+      margin-bottom: 0.25rem;
+    }
+
+    .c-text p, .c-text a {
+      color: var(--cinza);
+      text-decoration: none;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      transition: color 0.3s;
+    }
+
+    .c-text a:hover { color: var(--azul); }
+
+    .social-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .soc-btn {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid var(--azul-medio);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--azul);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .soc-btn svg { width: 18px; height: 18px; }
+
+    .soc-btn:hover {
+      background: var(--azul);
+      border-color: var(--azul);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .mapa {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      height: 390px;
+    }
+
+    .mapa iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--petroleo-escuro);
+      padding: 3.5rem 0 1.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-brand img { height: 44px; margin-bottom: 1rem; }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    .footer-col h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tiffany);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li { margin-bottom: 0.5rem; }
+
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover { color: var(--tiffany); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.28);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 1.75rem; right: 1.75rem;
+      z-index: 500;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.45);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.09);
+      box-shadow: 0 6px 26px rgba(37,211,102,0.55);
+    }
+
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 920px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .sobre-visual { max-width: 340px; margin: 0 auto; }
+      .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .produtos-grid { grid-template-columns: 1fr; }
+      .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 520px) {
+      .valores { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .mapa { height: 280px; }
+      header { padding: 0.9rem 1.25rem; }
+      header.scrolled { padding: 0.6rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header id="hdr">
+  <a href="#hero" aria-label="Awoomi - início">
+    <img src="Captura_de_tela_de_2026-04-29_09-01-12-removebg-preview.png" alt="Awoomi" class="logo-header">
+  </a>
+  <nav aria-label="Navegação principal">
+    <a href="#hero">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#contato">Contato</a>
+    <a href="https://wa.me/557141416808" class="nav-cta" target="_blank" rel="noopener">Fale conosco</a>
+  </nav>
+  <button class="hamburger" id="hbg" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mob-nav" role="dialog" aria-modal="true" aria-label="Menu">
+  <a href="#hero"     onclick="closeNav()">Início</a>
+  <a href="#sobre"    onclick="closeNav()">Sobre</a>
+  <a href="#produtos" onclick="closeNav()">Produtos</a>
+  <a href="#contato"  onclick="closeNav()">Contato</a>
+  <a href="https://wa.me/557141416808" target="_blank" rel="noopener">Fale conosco</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" aria-label="Início">
+  <div class="drops-bg" id="drops-bg"></div>
+
+  <div class="hero-content">
+    <img src="Captura_de_tela_de_2026-04-29_09-01-12-removebg-preview.png" alt="Awoomi — Arte afro-religiosa" class="hero-logo-img">
+
+    <div class="ornament" aria-hidden="true">
+      <span class="orn-line"></span>
+      <span class="orn-dot"></span>
+      <span class="orn-dot"></span>
+      <span class="orn-dot"></span>
+      <span class="orn-line r"></span>
+    </div>
+
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Awoomi</h1>
+    <p class="hero-sub">Arte Afro-Religiosa Artesanal</p>
+    <p class="hero-tagline">
+      <strong>É decoração, é proteção</strong> — cada peça criada com devoção,<br>cultura e identidade sagrada.
+    </p>
+
+    <div class="hero-btns">
+      <a href="https://wa.me/557141416808" class="btn-primary" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar pelo WhatsApp
+      </a>
+      <a href="#produtos" class="btn-ghost">Ver produtos</a>
+    </div>
+  </div>
+
+  <!-- animated waves at bottom -->
+  <div class="hero-wave" aria-hidden="true">
+    <svg class="wave-svg-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none" style="width:200%;height:70px;display:block;">
+      <path d="M0,35 C200,70 400,0 600,35 C800,70 1000,0 1200,35 C1400,70 1440,20 1440,35 L1440,70 L0,70Z" fill="#EBF6FD" opacity="0.6"/>
+    </svg>
+    <svg class="wave-svg-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none" style="width:200%;height:70px;display:block;position:absolute;bottom:0;left:0;">
+      <path d="M0,20 C240,60 480,0 720,30 C960,60 1200,10 1440,40 L1440,70 L0,70Z" fill="#EBF6FD"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ SOBRE ═══ -->
+<section id="sobre" aria-labelledby="sobre-h2">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-visual reveal">
+        <div class="sobre-shape" aria-hidden="true"></div>
+        <img src="Captura_de_tela_de_2026-04-29_09-01-12-removebg-preview.png" alt="Awoomi — logotipo" class="sobre-logo">
+        <div class="sobre-badge" aria-label="Artesã responsável: AwÔ Omi">
+          <strong>AwÔ Omi</strong>
+          Artesã responsável
+        </div>
+      </div>
+
+      <div class="sobre-text reveal d2">
+        <span class="sec-label">Quem somos</span>
+        <h2 id="sobre-h2">Arte que carrega ancestralidade e proteção</h2>
+        <p>A Awoomi nasceu da paixão pela cultura afro-brasileira e pela arte sacra dos Orixás. Cada peça é criada com dedicação, respeito à tradição e um olhar artístico único, unindo decoração e espiritualidade em um só elemento.</p>
+        <p>Sob a guia da artesã AwÔ Omi, a marca oferece obras que vão além do belo — são artefatos de proteção, identidade e pertencimento cultural para quem valoriza a herança afro-religiosa.</p>
+
+        <div class="valores">
+          <div class="valor">
+            <span class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/><path d="M2 17c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/><path d="M2 7c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/></svg>
+            </span>
+            <div>
+              <h3>Ancestralidade</h3>
+              <p>Tradições e saberes dos Orixás presentes em cada detalhe</p>
+            </div>
+          </div>
+          <div class="valor">
+            <span class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <div>
+              <h3>Artesanato único</h3>
+              <p>Cada peça é exclusiva, feita à mão com cuidado e intenção</p>
+            </div>
+          </div>
+          <div class="valor">
+            <span class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <div>
+              <h3>Proteção</h3>
+              <p>Arte que cuida e traz energia sagrada ao seu espaço</p>
+            </div>
+          </div>
+          <div class="valor">
+            <span class="valor-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="white" stroke="none"/><circle cx="17.5" cy="10.5" r=".5" fill="white" stroke="none"/><circle cx="8.5" cy="7.5" r=".5" fill="white" stroke="none"/><circle cx="6.5" cy="12.5" r=".5" fill="white" stroke="none"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            </span>
+            <div>
+              <h3>Decoração</h3>
+              <p>Peças que embelezam e dão personalidade ao ambiente</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave divider -->
+<svg class="divider-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 72" preserveAspectRatio="none" style="width:100%;height:72px;" aria-hidden="true">
+  <path d="M0,0 C360,72 1080,0 1440,55 L1440,72 L0,72Z" fill="#1A3D5C"/>
+</svg>
+
+<!-- ═══ MERCADO ═══ -->
+<section id="mercado" aria-labelledby="mercado-h2">
+  <div class="mercado-dots" aria-hidden="true"></div>
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">Nosso universo</span>
+      <h2 id="mercado-h2">Arte, cultura e fé</h2>
+      <p class="sec-desc">Trabalhamos no coração da cultura afro-brasileira, produzindo artesanato religioso com propósito e identidade.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5c0 2.5-1.5 4.5-3.5 5.5V22H10.5v-9.5C8.5 11.5 7 9.5 7 7a5 5 0 015-5z"/><path d="M9 22h6"/></svg>
+        </span>
+        <h3>Artesanato</h3>
+        <p>Peças artesanais únicas criadas com materiais nobres e técnicas tradicionais</p>
+      </div>
+      <div class="stat-card reveal d1">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0110 10c0 5.5-4.5 10-10 10S2 17.5 2 12z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </span>
+        <h3>Arte sacra</h3>
+        <p>Esculturas e adornos que representam a força e beleza dos Orixás</p>
+      </div>
+      <div class="stat-card reveal d2">
+        <span class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 19.34c-.6.95.32 2.05 1.38 1.73C9.14 19.7 17 17 21 7c-2 0-4 1-4 1s0-3-2-5c0 0-2 2-2 5z"/><path d="M3 21c0-4.97 2-7 4-9"/></svg>
+        </span>
+        <h3>Decoração cultural</h3>
+        <p>Objetos afro-religiosos que transformam qualquer espaço com história e identidade</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave divider -->
+<svg class="divider-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 72" preserveAspectRatio="none" style="width:100%;height:72px;" aria-hidden="true">
+  <path d="M0,55 C360,0 1080,72 1440,18 L1440,0 L0,0Z" fill="#1A3D5C"/>
+</svg>
+
+<!-- ═══ PRODUTOS ═══ -->
+<section id="produtos" aria-labelledby="produtos-h2">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">Nossos produtos</span>
+      <h2 id="produtos-h2">Cada peça conta uma história</h2>
+      <p class="sec-desc">Explore nossa coleção de artigos afro-religiosos criados com devoção, arte e ancestralidade.</p>
+    </div>
+
+    <div class="produtos-grid">
+
+      <!-- Esculturas -->
+      <div class="prod-card reveal">
+        <div class="prod-visual">
+          <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="55" cy="26" r="15" fill="rgba(110,207,207,0.85)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <path d="M40 48 C40 37 70 37 70 48 L74 96 C74 100 70 104 55 104 C40 104 36 100 36 96Z" fill="rgba(110,207,207,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <path d="M40 56 L18 67 C14 69 14 75 18 77 L40 70" fill="rgba(110,207,207,0.45)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <path d="M70 56 L92 67 C96 69 96 75 92 77 L70 70" fill="rgba(110,207,207,0.45)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <circle cx="55" cy="26" r="7" fill="rgba(255,255,255,0.25)"/>
+            <circle cx="28" cy="28" r="2" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="84" cy="42" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="18" cy="52" r="1" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+        </div>
+        <div class="prod-body">
+          <span class="prod-tag">Escultura</span>
+          <h3>Esculturas de Orixás</h3>
+          <p>Representações artísticas dos Orixás esculpidas com detalhes e devoção. Peças que trazem presença sagrada para o seu lar ou espaço religioso.</p>
+          <div class="prod-footer">
+            <a href="https://wa.me/557141416808?text=Olá!%20Tenho%20interesse%20nas%20esculturas%20de%20Orixás." class="prod-link" target="_blank" rel="noopener">Consultar via WhatsApp →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paramentos -->
+      <div class="prod-card reveal d1">
+        <div class="prod-visual">
+          <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18 76 L18 46 L32 56 L46 32 L55 52 L64 32 L78 56 L92 46 L92 76Z" fill="rgba(201,160,80,0.65)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+            <rect x="18" y="76" width="74" height="11" rx="4" fill="rgba(201,160,80,0.85)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <circle cx="55" cy="52" r="8" fill="rgba(110,207,207,0.8)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+            <circle cx="32" cy="64" r="5" fill="rgba(110,207,207,0.6)" stroke="rgba(255,255,255,0.35)"/>
+            <circle cx="78" cy="64" r="5" fill="rgba(110,207,207,0.6)" stroke="rgba(255,255,255,0.35)"/>
+            <circle cx="46" cy="42" r="3" fill="rgba(255,255,255,0.65)"/>
+            <circle cx="64" cy="42" r="3" fill="rgba(255,255,255,0.65)"/>
+          </svg>
+        </div>
+        <div class="prod-body">
+          <span class="prod-tag">Indumentária</span>
+          <h3>Paramentos para Orixás</h3>
+          <p>Vestimentas e adornos sagrados para culto e devoção. Produzidos com tecidos especiais e decorações que respeitam a tradição de cada Orixá.</p>
+          <div class="prod-footer">
+            <a href="https://wa.me/557141416808?text=Olá!%20Tenho%20interesse%20nos%20paramentos%20para%20Orixás." class="prod-link" target="_blank" rel="noopener">Consultar via WhatsApp →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ferramentas -->
+      <div class="prod-card reveal d2">
+        <div class="prod-visual">
+          <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="55" y1="12" x2="55" y2="90" stroke="rgba(110,207,207,0.9)" stroke-width="4" stroke-linecap="round"/>
+            <path d="M42 32 L55 12 L68 32" fill="none" stroke="rgba(110,207,207,0.9)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M28 52 L18 42 L28 32" fill="none" stroke="rgba(201,160,80,0.8)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M82 52 L92 42 L82 32" fill="none" stroke="rgba(201,160,80,0.8)" stroke-width="2.5" stroke-linejoin="round"/>
+            <ellipse cx="55" cy="92" rx="15" ry="6" fill="rgba(110,207,207,0.35)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <circle cx="36" cy="76" r="2" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="76" cy="70" r="1.5" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="22" cy="62" r="1" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+        </div>
+        <div class="prod-body">
+          <span class="prod-tag">Rituais</span>
+          <h3>Ferramentas de Orixás</h3>
+          <p>Instrumentos rituais e sagrados de cada Orixá, confeccionados artesanalmente com materiais de qualidade e fidelidade às tradições afro-brasileiras.</p>
+          <div class="prod-footer">
+            <a href="https://wa.me/557141416808?text=Olá!%20Tenho%20interesse%20nas%20ferramentas%20de%20Orixás." class="prod-link" target="_blank" rel="noopener">Consultar via WhatsApp →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Balangandã -->
+      <div class="prod-card reveal d3">
+        <div class="prod-visual">
+          <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="55" cy="28" rx="28" ry="8" fill="none" stroke="rgba(201,160,80,0.8)" stroke-width="2.5"/>
+            <line x1="36" y1="33" x2="31" y2="56" stroke="rgba(201,160,80,0.7)" stroke-width="1.5"/>
+            <line x1="47" y1="36" x2="45" y2="62" stroke="rgba(201,160,80,0.7)" stroke-width="1.5"/>
+            <line x1="55" y1="36" x2="55" y2="66" stroke="rgba(201,160,80,0.7)" stroke-width="1.5"/>
+            <line x1="63" y1="36" x2="65" y2="62" stroke="rgba(201,160,80,0.7)" stroke-width="1.5"/>
+            <line x1="74" y1="33" x2="79" y2="56" stroke="rgba(201,160,80,0.7)" stroke-width="1.5"/>
+            <circle cx="31" cy="63" r="7" fill="rgba(110,207,207,0.8)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <rect x="41" y="59" width="10" height="10" rx="2" fill="rgba(201,160,80,0.8)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <polygon points="55,59 59,69 51,69" fill="rgba(110,207,207,0.8)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <circle cx="65" cy="64" r="6" fill="rgba(201,160,80,0.7)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <rect x="75" y="52" width="9" height="13" rx="4" fill="rgba(110,207,207,0.6)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <circle cx="18" cy="38" r="2" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="93" cy="48" r="1.5" fill="rgba(255,255,255,0.45)"/>
+          </svg>
+        </div>
+        <div class="prod-body">
+          <span class="prod-tag">Joalheria</span>
+          <h3>Penca de balangandã</h3>
+          <p>Joias e amuletos tradicionais da cultura baiana, cheios de simbolismo e história. Cada penca é única, com pingentes que representam proteção e bênçãos.</p>
+          <div class="prod-footer">
+            <a href="https://wa.me/557141416808?text=Olá!%20Tenho%20interesse%20na%20penca%20de%20balangandã." class="prod-link" target="_blank" rel="noopener">Consultar via WhatsApp →</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /produtos-grid -->
+  </div>
+</section>
+
+<!-- ═══ CONTATO ═══ -->
+<section id="contato" aria-labelledby="contato-h2">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-label">Fale conosco</span>
+      <h2 id="contato-h2">Entre em contato</h2>
+      <p class="sec-desc">Estamos prontos para atender você e apresentar nossas criações.</p>
+    </div>
+
+    <div class="contato-grid">
+      <div class="reveal">
+        <div class="contato-item">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.73a16 16 0 006.36 6.36l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="c-text">
+            <h3>Telefone / WhatsApp</h3>
+            <p><a href="https://wa.me/557141416808" target="_blank" rel="noopener">(71) 4141-6808</a></p>
+          </div>
+        </div>
+
+        <div class="contato-item">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="c-text">
+            <h3>E-mail</h3>
+            <p><a href="mailto:awoomi@aless.art.br">awoomi@aless.art.br</a></p>
+          </div>
+        </div>
+
+        <div class="contato-item">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="c-text">
+            <h3>Endereço</h3>
+            <p>Caminho 21, Casa 03<br>Loteamento Parque Santa Rita</p>
+          </div>
+        </div>
+
+        <div class="contato-item">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="c-text">
+            <h3>Horário de atendimento</h3>
+            <p>Segunda a sexta: 9h às 17h</p>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a href="https://www.instagram.com/awo_omi" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram da Awoomi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/557141416808" target="_blank" rel="noopener" class="soc-btn" aria-label="WhatsApp da Awoomi">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <a href="https://wa.me/557141416808" class="btn-primary" target="_blank" rel="noopener">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar pelo WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="mapa reveal d1">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3889.2469636176265!2d-38.3552917!3d-12.8918351!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x716053c27a2268f%3A0x5e2fa5dfcfb0d630!2zQXfDlCBPbWk!5e0!3m2!1spt-BR!2sbr!4v1777465178052!5m2!1spt-BR!2sbr"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localização Awoomi — Caminho 21, Casa 03, Loteamento Parque Santa Rita">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="Captura_de_tela_de_2026-04-29_09-01-12-removebg-preview.png" alt="Awoomi">
+        <p>Arte afro-religiosa criada com ancestralidade, devoção e identidade cultural.</p>
+        <p style="margin-top:0.6rem;font-size:0.75rem;color:rgba(255,255,255,0.28);">CNPJ: 59.405.703/0001-42</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#produtos">Produtos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="https://wa.me/557141416808" target="_blank" rel="noopener">(71) 4141-6808</a></li>
+          <li><a href="mailto:awoomi@aless.art.br">awoomi@aless.art.br</a></li>
+          <li><a href="https://www.instagram.com/awo_omi" target="_blank" rel="noopener">@awo_omi</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Awoomi. Todos os direitos reservados.</span>
+      <span>É decoração, é proteção, é AwÔ Omi</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Rodapé MonteSite - Atualização Automática -->
+<div id="root"></div>
+<div id="montesite-footer-badge"></div>
+<script src="https://vaabpicspdbolvutnscp.supabase.co/functions/v1/get-footer-iframe"></script>
+
+<!-- ═══ WHATSAPP FLUTUANTE ═══ -->
+<a href="https://wa.me/557141416808" class="wa-float" target="_blank" rel="noopener" aria-label="Falar com a Awoomi pelo WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Header scroll
+  const hdr = document.getElementById('hdr');
+  window.addEventListener('scroll', () => {
+    hdr.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Hamburger
+  const hbg = document.getElementById('hbg');
+  const mobNav = document.getElementById('mob-nav');
+
+  hbg.addEventListener('click', () => {
+    const open = hbg.classList.toggle('open');
+    mobNav.classList.toggle('open', open);
+    hbg.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  function closeNav() {
+    hbg.classList.remove('open');
+    mobNav.classList.remove('open');
+    hbg.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  // Floating water drops
+  const bg = document.getElementById('drops-bg');
+  for (let i = 0; i < 16; i++) {
+    const d = document.createElement('div');
+    d.className = 'drop';
+    const s = Math.random() * 70 + 20;
+    d.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-delay:${Math.random()*10}s;animation-duration:${Math.random()*7+7}s`;
+    bg.appendChild(d);
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
